@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vanguarda dos Sussurros</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <header class="topo">
+      <h1>Vanguarda dos Sussurros</h1>
+      <!-- Frase original sua: "O medo desafia as leis do próprio tempo" -->
+      <p class="lema">O medo não obedece ao tempo. Chega antes de você e permanece depois.</p>
+    </header>
+
+    <nav class="abas">
+      <button type="button" class="aba ativa" data-aba="personagem">Personagem</button>
+      <button type="button" class="aba" data-aba="perfil">Perfil</button>
+      <button type="button" class="aba" data-aba="pericias">Perícias</button>
+      <button type="button" class="aba" data-aba="mochila">Mochila</button>
+      <button type="button" class="aba" data-aba="arquivos">Arquivos</button>
+      <button type="button" class="aba" data-aba="ficha">Ficha</button>
+    </nav>
+
+    <p id="aviso" class="aviso"></p>
+
+    <!-- ========== PERSONAGEM ========== -->
+    <section class="pagina ativa" id="pagina-personagem">
+      <div class="painel">
+        <h2>Identidade</h2>
+        <label>Nome
+          <input type="text" id="nome" placeholder="Ex: Aragorn">
+        </label>
+        <label>Raça
+          <select id="raca">
+            <option value="Humano">Humano</option>
+            <option value="Mascarado">Mascarado</option>
+            <option value="Sobre-humano">Sobre-humano</option>
+          </select>
+        </label>
+        <p id="sugestao" class="sugestao"></p>
+        <div class="traco">
+          <strong id="traco-nome"></strong>
+          <p id="traco-texto"></p>
+        </div>
+      </div>
+
+      <div class="painel">
+        <h2>NEX <span id="nex">0</span>%</h2>
+        <div class="barra"><div id="barra-nex"></div></div>
+        <p>Aumentos de atributo disponíveis: <strong id="pontos">0</strong></p>
+        <p>Perícias disponíveis: <strong class="js-pericias-livres">0</strong></p>
+        <div class="botoes">
+          <button type="button" id="nex-5">+5% NEX</button>
+          <button type="button" id="nex-10">+10% NEX</button>
+        </div>
+      </div>
+
+      <div class="painel">
+        <h2>Atributos</h2>
+        <div id="lista-atributos"></div>
+      </div>
+
+      <div class="painel">
+        <h2>Condição</h2>
+        <div class="stats">
+          <div class="stat"><span>Vida</span><strong id="vida">0</strong></div>
+          <div class="stat"><span>Lucidez</span><strong id="lucidez">0</strong></div>
+          <div class="stat"><span>Fôlego</span><strong id="folego">0</strong></div>
+          <div class="stat"><span>Defesa</span><strong id="defesa">0</strong></div>
+        </div>
+        <p id="efeito-carga" class="sugestao"></p>
+      </div>
+
+      <div class="botoes">
+        <button type="button" id="resetar" class="secundario">Apagar ficha</button>
+      </div>
+    </section>
+
+    <!-- ========== PERFIL ========== -->
+    <section class="pagina" id="pagina-perfil">
+      <div class="painel">
+        <h2>Perfil</h2>
+        <label>Nacionalidade <small>(opcional)</small>
+          <input type="text" id="nacionalidade" placeholder="Ex: Brasileiro">
+        </label>
+        <label>Descrição física
+          <textarea id="descricao" rows="4" placeholder="Altura, cicatrizes, jeito de se vestir, o que se nota primeiro..."></textarea>
+        </label>
+        <label>Traços de personalidade <small>(separe por vírgula)</small>
+          <input type="text" id="tracos" placeholder="Ex: desconfiado, leal, curioso">
+        </label>
+        <label>História
+          <textarea id="historia" rows="10" placeholder="Quem era antes do primeiro sussurro? O que perdeu? Por que entrou na Vanguarda?"></textarea>
+        </label>
+      </div>
+    </section>
+
+    <!-- ========== PERÍCIAS ========== -->
+    <section class="pagina" id="pagina-pericias">
+      <div class="painel">
+        <h2>Perícias</h2>
+        <p>Perícias disponíveis: <strong class="js-pericias-livres">0</strong></p>
+        <p class="sugestao">A cada +5% de NEX você aprende 1 perícia. A cada +10%, aprende 2.</p>
+        <div id="lista-pericias"></div>
+      </div>
+    </section>
+
+    <!-- ========== MOCHILA ========== -->
+    <section class="pagina" id="pagina-mochila">
+      <div class="painel">
+        <h2>Carga</h2>
+        <p>Peso total: <strong id="carga-texto">0 / 15</strong></p>
+        <div class="barra"><div id="barra-carga"></div><div class="marca"></div></div>
+        <p><strong id="carga-nivel"></strong>: <span id="carga-efeito"></span></p>
+        <p class="sugestao">Limite do corpo: 15 + 5 por ponto de Força. A marca na barra indica esse limite; o fim da barra é o máximo absoluto (200%).</p>
+      </div>
+
+      <div class="painel">
+        <h2>Recipientes</h2>
+        <div id="lista-recipientes"></div>
+      </div>
+
+      <div class="painel">
+        <h2>O que você carrega</h2>
+        <div id="lista-guardado"></div>
+      </div>
+
+      <div class="painel">
+        <h2>Equipamentos</h2>
+        <div id="filtros" class="filtros"></div>
+        <label>Guardar em
+          <select id="destino"></select>
+        </label>
+        <div id="lista-itens"></div>
+      </div>
+    </section>
+
+    <!-- ========== ARQUIVOS ========== -->
+    <section class="pagina" id="pagina-arquivos">
+      <div id="arquivos"></div>
+    </section>
+
+    <!-- ========== FICHA ========== -->
+    <section class="pagina" id="pagina-ficha">
+      <div id="ficha"></div>
+      <div class="botoes">
+        <button type="button" id="imprimir">Imprimir ficha</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="dados.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
